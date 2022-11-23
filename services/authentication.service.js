@@ -117,9 +117,9 @@ const checkUserExist = async (query) => {
 };
 
 const tokenVerification = async (req, res, next) => {
-  console.log(
-    `authentication.service | tokenVerification | ${req?.originalUrl}`
-  );
+  // console.log(
+  //   `authentication.service | tokenVerification | ${req?.originalUrl}`
+  // );
   try {
     if (
       req?.originalUrl.includes("/login") ||
@@ -160,7 +160,7 @@ const tokenVerification = async (req, res, next) => {
 };
 
 const tokenRefresh = async (req, res) => {
-  console.log(`authentication.service | tokenRefresh | ${req?.originalUrl}`);
+  //console.log(`authentication.service | tokenRefresh | ${req?.originalUrl}`);
   try {
     let token = req?.headers["authorization"];
     if (token && token.startsWith("Bearer ")) {
