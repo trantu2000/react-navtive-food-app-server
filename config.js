@@ -6,7 +6,9 @@ module.exports = {
     database: "food_react_native_db",
     collections: {
       USERS: "users",
-      RESTAURANTS: "restaurants"
+      RESTAURANTS: "restaurants",
+      FOODS: "foods",
+      CARTS: "carts",
     },
   },
   serverConfig: {
