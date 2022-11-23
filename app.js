@@ -4,11 +4,11 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+const MongoDB = require("./services/mongodb.service");
 var indexRouter = require("./routes/index");
 var authenticationRouter = require("./routes/authentication");
-const MongoDB = require("./services/mongodb.service");
-
 var userRouter = require("./routes/user.route");
+var restaurantRouter = require("./routes/restaurant.route");
 
 MongoDB.connectToMongoDB();
 
@@ -22,13 +22,14 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static("static"));
 
 app.use("*", require("./services/authentication.service").tokenVerification);
 
 app.use("/", indexRouter);
 app.use("/api", authenticationRouter);
 app.use("/api/user", userRouter);
+app.use("/api/restaurant", restaurantRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
