@@ -9,7 +9,7 @@ const config = require("../config");
 const userRegister = async (user) => {
   try {
     if (!user?.username || !user?.email || !user?.password)
-      return { status: false, message: "Please fill up all the fields" };
+      return { status: false, message: "Vui lòng điền thông tin vào chỗ trống" };
     const passwordHash = await bcrypt.hash(user?.password, 10);
     let userObject = {
       username: user?.username,
@@ -39,10 +39,10 @@ const userRegister = async (user) => {
   } catch (error) {
     let errorMessage = "User registered failed";
     error?.code === 11000 && error?.keyPattern?.username
-      ? (errorMessage = "Username already exist")
+      ? (errorMessage = "Tên người dùng đã tồn tại")
       : null;
     error?.code === 11000 && error?.keyPattern?.email
-      ? (errorMessage = "Email already exist")
+      ? (errorMessage = "Email đã tồn tại")
       : null;
     return {
       status: false,
@@ -55,7 +55,7 @@ const userRegister = async (user) => {
 const userLogin = async (user) => {
   try {
     if (!user?.username || !user?.password)
-      return { status: false, message: "Please fill up all the fields" };
+      return { status: false, message: "Vui lòng điền thông tin vào chỗ trống" };
     let userObject = await MongoDB.db
       .collection(mongoConfig.collections.USERS)
       .findOne({ username: user?.username });
@@ -81,13 +81,13 @@ const userLogin = async (user) => {
       } else {
         return {
           status: false,
-          message: "Incorrect password",
+          message: "Mật khẩu không đúng",
         };
       }
     } else {
       return {
         status: false,
-        message: "No user found",
+        message: "Không tìm thấy tên người dùng",
       };
     }
   } catch (error) {
@@ -102,8 +102,8 @@ const userLogin = async (user) => {
 
 const checkUserExist = async (query) => {
   let message = {
-    email: "Email already exist",
-    username: "This username is taken",
+    email: "Email đã tồn tại!",
+    username: "Tên người đã tồn tại",
   };
   try {
     let queryType = Object.keys(query)[0];
