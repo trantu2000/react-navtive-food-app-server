@@ -18,7 +18,7 @@
   },
   "projectConfig": {
     "mongoConnectionUrl": "mongodb://localhost:27017",
-    "serverIp": "192.168.110.254",
+    "serverIp": "172.20.10.3",
     "serverPort": 3000
   }
 }
